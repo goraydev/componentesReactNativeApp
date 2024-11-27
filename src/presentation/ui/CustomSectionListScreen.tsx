@@ -104,6 +104,7 @@ export const CustomSectionListScreen = () => {
             <Text style={{color: colors.primary}}>{item}</Text>
           )}
           showsVerticalScrollIndicator={false}
+          stickySectionHeadersEnabled
           renderSectionHeader={({section}) => (
             <Subtitle
               text={section.title}

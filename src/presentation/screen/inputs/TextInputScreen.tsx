@@ -10,9 +10,10 @@ import {CustomView} from '../../components/ui/CustomView';
 import {Title} from '../../components/ui/Title';
 import {Card} from '../../components/ui/Card';
 import {globalStyles} from '../../../config/theme';
-import {useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import {Button} from '../../components/ui/Button';
 import {Message} from '../../components/ui/Message';
+import {ThemeContext} from '../../context/ThemeContext';
 
 interface PropsMessage {
   message: string;
@@ -20,6 +21,7 @@ interface PropsMessage {
 }
 
 export const TextInputScreen = () => {
+  const {colors} = useContext(ThemeContext);
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -51,21 +53,21 @@ export const TextInputScreen = () => {
           <Title title="Text Inputs" safe />
           <Card>
             <TextInput
-              style={globalStyles.input}
+              style={[globalStyles.input, {backgroundColor: colors.primary}]}
               placeholder="Nombre completo"
               autoCapitalize={'words'}
               autoCorrect={false}
               onChangeText={value => setForm({...form, name: value})}
             />
             <TextInput
-              style={globalStyles.input}
+              style={[globalStyles.input, {backgroundColor: colors.primary}]}
               placeholder="Ingrese su correo"
               autoCorrect={false}
               keyboardType="email-address"
               onChangeText={value => setForm({...form, email: value})}
             />
             <TextInput
-              style={globalStyles.input}
+              style={[globalStyles.input, {backgroundColor: colors.primary}]}
               placeholder="Su edad"
               autoCorrect={false}
               keyboardType="number-pad"
@@ -110,7 +112,7 @@ export const TextInputScreen = () => {
             <TextInput
               keyboardType="phone-pad"
               placeholder="Su telefono"
-              style={globalStyles.input}
+              style={[globalStyles.input, {backgroundColor: colors.primary}]}
               onChangeText={value => setForm({...form, phone: value})}
             />
           </Card>

@@ -5,6 +5,10 @@ import {colors, globalStyles} from '../../../config/theme';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Title} from '../../components/ui/Title';
 import {MenuItem} from '../../components/MenuItem';
+import {ThemeContext} from '../../context/ThemeContext';
+import {useContext} from 'react';
+import {CustomView} from '../../components/ui/CustomView';
+import {SwitchDarkLight} from '../../components/ui/SwitchDarkLight';
 
 export const animationsItems = [
   {
@@ -73,9 +77,15 @@ export const uiItems = [
 ];
 
 export const HomeScreen = () => {
+  const {colors} = useContext(ThemeContext);
   return (
-    <View style={[globalStyles.mainContainer]}>
+    <CustomView
+      style={[
+        globalStyles.mainContainer,
+        {backgroundColor: colors.background},
+      ]}>
       <View style={{...globalStyles.globalMargin}}>
+        <SwitchDarkLight />
         <ScrollView>
           <Title title="Opciones de Menú" safe />
           {animationsItems.map((item, index) => (
@@ -88,6 +98,19 @@ export const HomeScreen = () => {
               isLast={index === animationsItems.length - 1}
             />
           ))}
+
+          <View style={{marginVertical: 10}} />
+          {uiItems.map((item, index) => (
+            <MenuItem
+              key={item.component}
+              name={item.name}
+              icon={item.icon}
+              component={item.component}
+              isFirst={index === 0}
+              isLast={index === uiItems.length - 1}
+            />
+          ))}
+
           <View style={{marginVertical: 10}} />
           {menuItems.map((item, index) => (
             <MenuItem
@@ -99,20 +122,8 @@ export const HomeScreen = () => {
               isLast={index === menuItems.length - 1}
             />
           ))}
-          <View style={{marginVertical: 10}} />
-
-          {uiItems.map((item, index) => (
-            <MenuItem
-              key={item.component}
-              name={item.name}
-              icon={item.icon}
-              component={item.component}
-              isFirst={index === 0}
-              isLast={index === uiItems.length - 1}
-            />
-          ))}
         </ScrollView>
       </View>
-    </View>
+    </CustomView>
   );
 };

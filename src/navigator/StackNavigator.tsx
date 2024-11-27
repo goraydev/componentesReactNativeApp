@@ -8,6 +8,11 @@ import {TextInputScreen} from '../presentation/screen/inputs/TextInputScreen';
 import {PullToRefreshScreen} from '../presentation/ui/PullToRefreshScreen';
 import {CustomSectionListScreen} from '../presentation/ui/CustomSectionListScreen';
 import {ModalScreen} from '../presentation/screen/Modal/ModalScreen';
+import {InfiniteScrollScreen} from '../presentation/ui/InfiniteScrollScreen';
+import {SlidesScreen} from '../presentation/screen/Slides/SlidesScreen';
+import {ChangeThemeScreen} from '../presentation/screen/theme/ChangeThemeScreen';
+import {useContext} from 'react';
+import {ThemeContext} from '../presentation/context/ThemeContext';
 
 export type RootStackParams = {
   home: undefined;
@@ -18,8 +23,16 @@ export type RootStackParams = {
 
 export const StackNavigator = () => {
   const Stack = createStackNavigator();
+  const {colors} = useContext(ThemeContext);
+
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+        headerStyle: {backgroundColor: colors.background},
+        headerTintColor: colors.text,
+        headerMode: 'float',
+      }}>
       <Stack.Screen name="home" component={HomeScreen} />
       <Stack.Screen name="switches" component={SwitchScreen} />
       <Stack.Screen name="Animation101Screen" component={Animation101Screen} />
@@ -36,6 +49,12 @@ export const StackNavigator = () => {
         component={CustomSectionListScreen}
       />
       <Stack.Screen name="ModalScreen" component={ModalScreen} />
+      <Stack.Screen
+        name="InfiniteScrollScreen"
+        component={InfiniteScrollScreen}
+      />
+      <Stack.Screen name="SlidesScreen" component={SlidesScreen} />
+      <Stack.Screen name="ChangeThemeScreen" component={ChangeThemeScreen} />
     </Stack.Navigator>
   );
 };

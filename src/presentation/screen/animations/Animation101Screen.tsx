@@ -1,13 +1,19 @@
 import {Animated, Pressable, StyleSheet, Text, View} from 'react-native';
 import {colors} from '../../../config/theme';
 import {useAnimation} from '../../hooks/useAnimation';
+import {CustomView} from '../../components/ui/CustomView';
+import {Button} from '../../components/ui/Button';
+import {useContext} from 'react';
+import {ThemeContext} from '../../context/ThemeContext';
 
 export const Animation101Screen = () => {
   const {animatedOpacity, animatedTop, fadeIn, fadeOut, showHide} =
     useAnimation();
 
+  const {colors} = useContext(ThemeContext);
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: colors.background}]}>
       <Animated.View
         style={[
           styles.purpleBox,
@@ -15,22 +21,19 @@ export const Animation101Screen = () => {
         ]}
       />
       <View style={styles.containerButtons}>
-        <Pressable
+        <Button
+          text="Fade In"
           onPress={() => fadeIn({duration: 900, toValue: 1})}
-          style={styles.button}>
-          <Text>FadeIn</Text>
-        </Pressable>
-        <Pressable
+          styles={styles.button}></Button>
+        <Button
+          text="Fade Out"
           onPress={() => fadeOut({duration: 500, toValue: 0})}
-          style={styles.button}>
-          <Text>FadeOut</Text>
-        </Pressable>
-        <Pressable onPress={() => showHide()} style={styles.button}>
-          <Text>Show/Hide</Text>
-        </Pressable>
-        <Pressable style={styles.button}>
-          <Text>Move Y Box</Text>
-        </Pressable>
+          styles={styles.button}></Button>
+        <Button
+          text="Show/Hide"
+          onPress={() => showHide()}
+          styles={styles.button}
+        />
       </View>
     </View>
   );

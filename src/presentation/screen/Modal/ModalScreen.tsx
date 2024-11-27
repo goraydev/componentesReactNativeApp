@@ -2,9 +2,11 @@ import {Modal, Platform, StyleSheet, Text, View} from 'react-native';
 import {CustomView} from '../../components/ui/CustomView';
 import {Title} from '../../components/ui/Title';
 import {Button} from '../../components/ui/Button';
-import {useState} from 'react';
+import {useContext, useState} from 'react';
+import {ThemeContext} from '../../context/ThemeContext';
 
 export const ModalScreen = () => {
+  const {colors} = useContext(ThemeContext);
   const [showModal, setShowModal] = useState(false);
 
   const onPress = () => {
@@ -18,9 +20,14 @@ export const ModalScreen = () => {
       <Modal visible={showModal} animationType="fade" transparent={true}>
         {/* Mostrar de manera 1 */}
         <View style={{...styles.centeredView}}>
-          <View style={{...styles.modalView}}>
+          <View
+            style={{
+              ...styles.modalView,
+              backgroundColor: colors.background,
+              shadowColor: colors.primary,
+            }}>
             <Title title="Modal Content" safe />
-            <Text>
+            <Text style={{color: colors.text}}>
               Lorem ipsum, dolor sit amet consectetur adipisicing elit.
               Veritatis eveniet maxime ad voluptates eligendi delectus
               doloremque eos fugit, nobis voluptas, impedit, tempora animi quia
@@ -64,10 +71,7 @@ const styles = StyleSheet.create({
   modalView: {
     margin: 10,
     padding: 20,
-    backgroundColor: 'white',
     borderRadius: 20,
-
-    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,

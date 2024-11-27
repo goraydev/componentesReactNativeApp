@@ -5,6 +5,8 @@ import {RootStackParams} from '../../navigator/StackNavigator';
 import {colors} from '../../config/theme';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Separator} from './ui/Separator';
+import {ThemeContext} from '../context/ThemeContext';
+import {useContext} from 'react';
 
 export const MenuItem = ({
   name,
@@ -14,6 +16,7 @@ export const MenuItem = ({
   isLast = false,
 }: PropsMenuItems) => {
   const navigation = useNavigation<NavigationProp<any>>();
+  const {colors} = useContext(ThemeContext);
 
   return (
     <>

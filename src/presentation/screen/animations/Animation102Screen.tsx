@@ -1,13 +1,15 @@
-import {useRef} from 'react';
+import {useContext, useRef} from 'react';
 import {Animated, PanResponder, StyleSheet, Text, View} from 'react-native';
 import {colors} from '../../../config/theme';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useAnimation} from '../../hooks/useAnimation';
+import {ThemeContext} from '../../context/ThemeContext';
 
 export const Animation102Screen = () => {
   const {pan, panResponder} = useAnimation();
+  const {colors} = useContext(ThemeContext);
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: colors.background}]}>
       <Animated.View
         {...panResponder.panHandlers}
         style={[
@@ -17,7 +19,9 @@ export const Animation102Screen = () => {
           styles.purpleBox,
         ]}
       />
-      <Text>Animation102Screen</Text>
+      <Text style={{color: colors.text, marginVertical: 10}}>
+        Animation102Screen
+      </Text>
     </View>
   );
 };
